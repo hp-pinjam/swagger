@@ -16,39 +16,47 @@ externalDocs:
 servers:
   - url: https://us-central1-pyoyek3.cloudfunctions.net
 tags:
-  - name: User
-    description: Data User
+  - name: auth
+    description: Authentikasi
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: 
-  - name: Auth
-    description: Auth to Access to API
+      url: https://github.com/GIS-RIZIQ/backendgcf
+  - name: register
+    description: Register Account
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: 
+      url: https://github.com/GIS-RIZIQ/backendgcf
+  - name: data
+    description: Data Untuk akses GIS
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/GIS-RIZIQ/backendgcf
 paths:
-  user:
-    get:
+  /register:
+    post:
       tags:
-        - User
-      summary: Get userperpus
-      description: List Data User
-      operationId: getUserJSON
+        - register
+      summary: Register User Without Token
+      description: Daftar Akun User
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
       responses:
-        "200":
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid status value
-  login:
+                $ref: '#/components/schemas/Response'
+        '405':
+          description: Invalid input
+  /Login:
     post:
       tags:
-        - Auth
+        - auth
       summary: Login get Token
       description: Login and Get User Token
       operationId: authService
@@ -56,41 +64,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Login"
+              $ref: '#/components/schemas/Auth'
       responses:
-        "200":
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthResponse"
-        "405":
+                $ref: '#/components/schemas/AuthResponse'
+        '405':
           description: Invalid input
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
+
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        _id:
-          type: string
-          example: perpuscoba
-        email:
-          type: string
-          example: perpus@gmail.com
-    Login:
+    user:
       type: object
       properties:
         username:
           type: string
-          example: perpuscoba
+          example : coba
         password:
           type: string
-          example: perpusdotcom
-    AuthResponse:
+          example: riziq
+    Response:
       type: object
       properties:
         status:
@@ -98,17 +94,68 @@ components:
           example: true
         message:
           type: string
-          example: selamat datang
+          example: Berhasil Input data
+    responseUser:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: berhasil ambil data
+        data:
+          type: object
+          properties:
+            username:
+              type: string
+              example: coba
+            password:
+              type: string
+              example: hashed password
+            role:
+              type: string
+              example: user
+    Auth:
+      type: object
+      properties:
+        username:
+          type: string
+          example: coba
+        password:
+          type: string
+          example: riziq
+    bodycord:
+      type: object
+      properties:
+        type:
+          type: string
+          example: polygon
+        name:
+          type: string
+          example: coba
+        volume:
+          type: string
+          example: "1"
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: Selamat Datang
         token:
           type: string
-          example: token
+          example: riziq
   requestBodies:
     AuthReq:
       description: Request Authentication
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Login"
+            $ref: '#/components/schemas/Auth'
     UserArray:
       description: List of user object
       content:
@@ -116,9 +163,9 @@ components:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/AuthResponse"
+              $ref: '#/components/schemas/AuthResponse'
   securitySchemes:
-    token:
+    Login:
       type: apiKey
-      name: token
+      name: Login
       in: header
