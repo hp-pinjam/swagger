@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function - OpenAPI 3.0
+  description: >-
+    Dokumen API Cloud Function Perpustakaan Digital
+  termsOfService: https://hp-pinjam.my.id/swagger/
+  contact:
+    email: farhanriziq01@gmail.com
+  license:
+    name: Pasetobackend Package
+    url: https://pkg.go.dev/github.com/hp-pinjam/backendgcf
+  version: 1.0.1
+externalDocs:
+  description: Repo backend
+  url: http://hp-pinjam.my.id/backendgcf/
+servers:
+  - url: https://us-central1-pyoyek3.cloudfunctions.net
+tags:
+  - name: User
+    description: Data User
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: 
+  - name: Auth
+    description: Auth to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: 
+paths:
+  user:
+    get:
+      tags:
+        - User
+      summary: Get userperpus
+      description: List Data User
+      operationId: getUserJSON
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid status value
+  login:
+    post:
+      tags:
+        - Auth
+      summary: Login get Token
+      description: Login and Get User Token
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: perpuscoba
+        email:
+          type: string
+          example: perpus@gmail.com
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          example: perpuscoba
+        password:
+          type: string
+          example: perpusdotcom
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: selamat datang
+        token:
+          type: string
+          example: token
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Login"
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AuthResponse"
+  securitySchemes:
+    token:
+      type: apiKey
+      name: token
+      in: header
