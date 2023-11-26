@@ -20,17 +20,12 @@ tags:
     description: Authentikasi
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://github.com/GIS-RIZIQ/backendgcf
+      url: http://hp-pinjam.my.id/backendgcf/
   - name: register
     description: Register Account
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://github.com/GIS-RIZIQ/backendgcf
-  - name: data
-    description: Data Untuk akses GIS
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://github.com/GIS-RIZIQ/backendgcf
+      url: http://hp-pinjam.my.id/backendgcf/
 paths:
   /register:
     post:
