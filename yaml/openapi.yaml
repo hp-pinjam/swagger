@@ -120,18 +120,6 @@ components:
         password:
           type: string
           example: riziq
-    bodycord:
-      type: object
-      properties:
-        type:
-          type: string
-          example: polygon
-        name:
-          type: string
-          example: coba
-        volume:
-          type: string
-          example: "1"
     AuthResponse:
       type: object
       properties:
