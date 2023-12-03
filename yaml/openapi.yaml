@@ -8,26 +8,28 @@ info:
     email: farhanriziq01@gmail.com
   license:
     name: Pasetobackend Package
-    url: https://pkg.go.dev/github.com/hp-pinjam/backendgcf
+    url1: https://pkg.go.dev/github.com/hp-pinjam/pasetobackend
+    url2: https://pkg.go.dev/github.com/hp-pinjam/pasetobackendadmin
+    url3: https://pkg.go.dev/github.com/hp-pinjam/be_p3
   version: 1.0.1
 externalDocs:
   description: Repo backend
-  url: http://hp-pinjam.my.id/backendgcf/
+  url: http://hp-pinjam.my.id/pasetobackend/
 servers:
-  - url: https://us-central1-pyoyek3.cloudfunctions.net
+  - url: https://asia-southeast2-hppinjam.cloudfunctions.net
 tags:
   - name: auth
     description: Authentikasi
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: http://hp-pinjam.my.id/backendgcf/
+      url: http://hp-pinjam.my.id/pasetobackend/
   - name: register
     description: Register Account
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: http://hp-pinjam.my.id/backendgcf/
+      url: http://hp-pinjam.my.id/pasetobackend/
 paths:
-  /register:
+  /registeruser:
     post:
       tags:
         - register
@@ -77,10 +79,10 @@ components:
       properties:
         username:
           type: string
-          example : coba
+          example : farhan
         password:
           type: string
-          example: riziq
+          example: akurijik
     Response:
       type: object
       properties:
@@ -104,7 +106,7 @@ components:
           properties:
             username:
               type: string
-              example: coba
+              example: farhan
             password:
               type: string
               example: hashed password
@@ -116,10 +118,10 @@ components:
       properties:
         username:
           type: string
-          example: coba
+          example: farhan
         password:
           type: string
-          example: riziq
+          example: akurijik
     AuthResponse:
       type: object
       properties:
@@ -131,7 +133,7 @@ components:
           example: Selamat Datang
         token:
           type: string
-          example: riziq
+          example: akurijik
   requestBodies:
     AuthReq:
       description: Request Authentication
