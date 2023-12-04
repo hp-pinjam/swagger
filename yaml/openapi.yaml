@@ -123,6 +123,57 @@ paths:
           description: Forbidden - Admin does not have permission
         '405':
           description: Invalid input
+  /updatehp:
+    put:
+      tags:
+        - hp
+      summary: Update Mobile Phone by ID
+      description: Update mobile phone data in the database by ID
+      operationId: updateHpService
+      security:
+        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
+      parameters:
+        - name: nomorid
+          in: path
+          description: ID of the mobile phone to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nomorid:
+                  type: integer
+                  example: 5
+                title:
+                  type: string
+                  example: Updated Mitto
+                description:
+                  type: string
+                  example: Updated hp produk lokal
+                image:
+                  type: string
+                  format: binary
+              required:
+                - nomorid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          description: Unauthorized - Admin not logged in
+        '403':
+          description: Forbidden - Admin does not have permission
+        '404':
+          description: Not Found - Mobile phone not found
+        '405':
+          description: Invalid input
 
 components:
   schemas:
