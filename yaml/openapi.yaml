@@ -103,6 +103,8 @@ paths:
       summary: Insert Mobile Phone
       description: Insert mobile phone into the database
       operationId: insertHpService
+      security:
+        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
       requestBody:
         content:
           application/json:
@@ -115,6 +117,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
+        '401':
+          description: Unauthorized - Admin not logged in
+        '403':
+          description: Forbidden - Admin does not have permission
         '405':
           description: Invalid input
 
