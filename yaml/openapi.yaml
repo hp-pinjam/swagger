@@ -174,7 +174,7 @@ paths:
           description: Not Found - Mobile phone not found
         '405':
           description: Invalid input
-  /getallhp:
+  /getalldatahp:
     get:
       tags:
         - hp
@@ -198,7 +198,6 @@ paths:
           description: Forbidden - Admin does not have permission
         '405':
           description: Invalid input
-
   /deletehp/{nomorid}:
     delete:
       tags:
