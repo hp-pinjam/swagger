@@ -27,6 +27,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: http://hp-pinjam.my.id/pasetobackend/
+  - name: hp
+    description: Mobile Phone Operations
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: http://hp-pinjam.my.id/pasetobackend/
 paths:
   /registeruser:
     post:
@@ -91,6 +96,27 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
+  /inserthp:
+    post:
+      tags:
+        - hp
+      summary: Insert Mobile Phone
+      description: Insert mobile phone into the database
+      operationId: insertHpService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MobilePhone'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '405':
+          description: Invalid input
 
 components:
   schemas:
@@ -112,6 +138,21 @@ components:
         password:
           type: string
           example: hebat
+    MobilePhone:
+      type: object
+      properties:
+        nomorid:
+          type: integer
+          example: 5
+        title:
+          type: string
+          example: Mitto
+        description:
+          type: string
+          example: hp produk lokal
+        image:
+          type: string
+          format: binary
     Response:
       type: object
       properties:
@@ -176,6 +217,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AdminAuth'
+    MobilePhoneReq:
+      description: Request Mobile Phone Insertion
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MobilePhone'
     UserArray:
       description: List of user object
       content:
