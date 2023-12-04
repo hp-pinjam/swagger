@@ -174,6 +174,62 @@ paths:
           description: Not Found - Mobile phone not found
         '405':
           description: Invalid input
+  /getallhp:
+    get:
+      tags:
+        - hp
+      summary: Get All Mobile Phones
+      description: Retrieve all mobile phone data from the database
+      operationId: getAllHpService
+      security:
+        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MobilePhone'
+        '401':
+          description: Unauthorized - Admin not logged in
+        '403':
+          description: Forbidden - Admin does not have permission
+        '405':
+          description: Invalid input
+
+  /deletehp/{nomorid}:
+    delete:
+      tags:
+        - hp
+      summary: Delete Mobile Phone by ID
+      description: Delete mobile phone data from the database by ID
+      operationId: deleteHpService
+      security:
+        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
+      parameters:
+        - name: nomorid
+          in: path
+          description: ID of the mobile phone to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          description: Unauthorized - Admin not logged in
+        '403':
+          description: Forbidden - Admin does not have permission
+        '404':
+          description: Not Found - Mobile phone not found
+        '405':
+          description: Invalid input
 
 components:
   schemas:
