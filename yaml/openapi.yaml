@@ -123,7 +123,7 @@ paths:
           description: Forbidden - Admin does not have permission
         '405':
           description: Invalid input
-  /updatehp/{nomorid}:
+  /updatehp:
     put:
       tags:
         - hp
