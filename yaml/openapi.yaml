@@ -96,7 +96,7 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
-  /inserthp:
+  /insertdatahp:
     post:
       tags:
         - hp
