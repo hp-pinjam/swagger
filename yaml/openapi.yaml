@@ -9,8 +9,7 @@ info:
   license:
     name: Pasetobackend Package
     url1: https://pkg.go.dev/github.com/hp-pinjam/pasetobackend
-    url2: https://pkg.go.dev/github.com/hp-pinjam/pasetobackendadmin
-    url3: https://pkg.go.dev/github.com/hp-pinjam/be_p3
+    url2: https://pkg.go.dev/github.com/hp-pinjam/be_p3
   version: 1.0.1
 externalDocs:
   description: Repo backend
@@ -54,14 +53,35 @@ paths:
     post:
       tags:
         - auth
-      summary: Login get Token
-      description: Login and Get User Token
+      summary: User Login to Get Token
+      description: User Login and Get Token
       operationId: authService
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Auth'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '405':
+          description: Invalid input
+  /adminlogin:
+    post:
+      tags:
+        - auth
+      summary: Admin Login to Get Token
+      description: Admin Login and Get Token using Email and Password
+      operationId: adminLoginService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminAuth'
       responses:
         '200':
           description: successful operation
@@ -79,10 +99,19 @@ components:
       properties:
         username:
           type: string
-          example : farhan
+          example: farhan
         password:
           type: string
           example: akurijik
+    AdminAuth:
+      type: object
+      properties:
+        email:
+          type: string
+          example: hppinjam@gmail.com
+        password:
+          type: string
+          example: hebat
     Response:
       type: object
       properties:
@@ -141,6 +170,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Auth'
+    AdminAuthReq:
+      description: Request Admin Authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AdminAuth'
     UserArray:
       description: List of user object
       content:
